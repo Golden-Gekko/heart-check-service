@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: heart-api-config
+  namespace: heart-api
+data:
+  APP_NAME: "heart-api"
+  APP_HOST: "0.0.0.0"
+  APP_PORT: "8000"
+  LOG_LEVEL: "INFO"
+  MLFLOW_TRACKING_URI: "http://mlflow-server:5000"
+  MLFLOW_MODEL_NAME: "heart_attack_rf"
+  MLFLOW_MODEL_ALIAS: "champion"
+  CPU_LAG_TICKS: "150000"

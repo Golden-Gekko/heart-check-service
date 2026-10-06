@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heart-api
+  namespace: heart-api
+  labels:
+    app: heart-api
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: heart-api
+  template:
+    metadata:
+      labels:
+        app: heart-api
+    spec:
+      containers:
+        - name: heart-api
+          image: ghcr.io/golden-gekko/heart-check-service:latest
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: s3-creds
+            - configMapRef:
+                name: heart-api-config
+          env:
+            - name: MLFLOW_S3_ENDPOINT_URL
+              value: 'https://storage.yandexcloud.net'
+            - name: AWS_DEFAULT_REGION
+              value: 'ru-central1'
+          ports:
+            - containerPort: 8000
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 5
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"
+              cpu: "1000m"

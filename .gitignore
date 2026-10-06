@@ -1,0 +1,30 @@
+.idea/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# MLflow локальный реестр
+mlruns/
+models/
+
+# Terraform
+infra/.terraform/
+infra/.terraform.lock.hcl
+infra/*.tfstate
+infra/*.tfstate.*
+infra/*.tfvars
+infra/variables.json
+
+# Секреты
+*.pem
+*.key
+*.crt
+.env
+
+# Логи и скриншоты
+logs/

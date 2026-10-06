@@ -1,0 +1,23 @@
+yc_config = {
+  token     = "y0__..."          # ваш OAuth-токен
+  cloud_id  = "b1g..."           # Cloud ID
+  folder_id = "b1g..."           # Folder ID
+  zone      = "ru-central1-a"
+}
+
+cluster_name            = "heart-api-k8s"
+node_count              = 3
+node_cores              = 4
+node_memory             = 16
+node_disk_size          = 50
+network_cidr            = "10.200.0.0/16"
+yc_service_account_name = "heart-api-sa"
+yc_bucket_name          = "heart-api-bucket"
+yc_storage_endpoint_url = "https://storage.yandexcloud.net"
+yc_mlflow_instance_name = "heart-api-mlflow"
+yc_kafka_cluster_name   = "heart-api-kafka"
+kafka_producer_password = "ProducerPass123!"
+kafka_consumer_password = "ConsumerPass123!"
+ubuntu_image_family     = "ubuntu-2204-lts"
+public_key_path         = "~/.ssh/id_rsa.pub"
+private_key_path        = "~/.ssh/id_rsa"

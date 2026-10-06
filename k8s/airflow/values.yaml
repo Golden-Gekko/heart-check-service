@@ -1,0 +1,97 @@
+airflowVersion: "2.11.0"
+
+images:
+  airflow:
+    repository: apache/airflow
+    tag: "2.11.0"
+
+executor: "KubernetesExecutor"
+
+config:
+  core:
+    dags_are_paused_at_creation: "true"
+    load_examples: "false"
+  logging:
+    remote_logging: "false"
+  webserver:
+    expose_config: "true"
+
+dags:
+  persistence:
+    enabled: false
+  gitSync:
+    enabled: true
+    repo: "https://github.com/Golden-Gekko/heart-check-service.git"
+    branch: "main"
+    subPath: "dags"
+    depth: 1
+    maxFailures: 0
+    period: "60s"
+
+webserver:
+  service:
+    type: NodePort
+    ports:
+      - name: airflow-ui
+        port: 8080
+        nodePort: 30081
+  startupProbe:
+    initialDelaySeconds: 0
+    timeoutSeconds: 20
+    failureThreshold: 60
+    periodSeconds: 10
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+
+scheduler:
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+triggerer:
+  enabled: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+postgresql:
+  enabled: true
+  auth:
+    username: airflow
+    password: airflow
+    database: airflow
+  persistence:
+    enabled: true
+    size: 8Gi
+  image:
+    repository: bitnamilegacy/postgresql
+    tag: "16.4.0-debian-12-r13"
+
+redis:
+  enabled: false
+
+workers:
+  serviceAccount:
+    create: true
+    annotations: {}
+
+kubernetes:
+  namespace: airflow
+
+createUserJob:
+  useHelmHooks: true
+migrateDatabaseJob:
+  useHelmHooks: true
