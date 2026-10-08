@@ -40,6 +40,7 @@ alertmanager:
             send_resolved: true
             headers:
               Subject: "[MLOps Alert] {{ .GroupLabels.alertname }}"
+      - name: "null"
   alertmanagerSpec:
     resources:
       requests:

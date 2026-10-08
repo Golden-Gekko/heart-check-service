@@ -201,26 +201,14 @@ terraform destroy
 
 ![ci_cd](screenshots/ci_cd.png)
 
-### Yandex Cloud: k8s кластер из 3 узлов
-
-![yc_cluster](screenshots/yc_cluster.png)
-
-### MLflow: зарегистрированная модель `heart_attack_rf@champion`
-
-![mlflow_model](screenshots/mlflow_model.png)
-
 ### Airflow: успешный прогон DAG `periodic_retrain`
 
 ![airflow_dag](screenshots/airflow_dag.png)
-
-### Kubernetes: увеличение до 6 реплик
-
-![k8s-pods](screenshots/k8s-pods.png)
 
 ### Grafana
 
 ![grafana_cpu](screenshots/grafana_cpu.png)
 
-### Prometheus: алерт `HeartAPIHighLoad`
+### UI
 
-![prometheus_alert](screenshots/prometheus_alert.png)
+![service_ui](screenshots/ui.png)
